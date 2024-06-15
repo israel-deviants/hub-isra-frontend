@@ -18,8 +18,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 I'm gonna first work completely in the frontend page, and implement a fake service to mock a backend, after everything is workingas expected that way, I will create the backend and change the connection.
 
-- Create a better layout for the homepage/dashboard
-- Create a specific layout for Log-In
+- OK. Create a better layout for the homepage/dashboard
+- OK. Create a specific layout for Log-In
 - Component for user widget and connect/disconnect buttons
 - Implement a wallet connect provider
 - Store the wallet address in zuztand state management
@@ -30,3 +30,5 @@ Build the backend
 - Generate a JWT from the signature in the frontend
 - Create the basic memory-stored service for: Login, Favorite projects CRUD
 - Change to database
+
+- Make it pretty
