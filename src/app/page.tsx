@@ -1,10 +1,10 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 import Copyright from "@/components/Copyright";
 import Header from "@/components/Header";
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/app/dashboard/components/Dashboard";
 
 export default function Home() {
   return (

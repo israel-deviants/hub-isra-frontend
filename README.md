@@ -20,9 +20,9 @@ I'm gonna first work completely in the frontend page, and implement a fake servi
 
 - OK. Create a better layout for the homepage/dashboard
 - OK. Create a specific layout for Log-In
-- Component for user widget and connect/disconnect buttons
-- Implement a wallet connect provider
-- Store the wallet address in zuztand state management
+- OK. Implement a wallet connect provider
+- OK. Store the wallet address in zuztand state management
+- OK. Component for user widget and connect/disconnect buttons
 - Build components for NFT listing, Token listing, add token/nft, search, etc.
 - Get projects from a token/NFT aggregator API (probably Coingecko)
 
@@ -30,5 +30,6 @@ Build the backend
 - Generate a JWT from the signature in the frontend
 - Create the basic memory-stored service for: Login, Favorite projects CRUD
 - Change to database
+- Validate access token in other pages
 
 - Make it pretty
