@@ -8,7 +8,7 @@ export interface WalletStore {
 }
 
 export const useWalletStore = create(
-  persist(
+  persist<WalletStore>(
     (set): WalletStore => ({
       wallet: undefined,
       setWallet: (wallet: WalletAddress) => set({ wallet }),
