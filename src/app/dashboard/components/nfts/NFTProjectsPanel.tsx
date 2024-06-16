@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import NFTProjectList from "./NFTProjectList";
+import NFTProjectListTitle from "./NFTProjectListTitle";
 
 interface NFTProjectsPanelProps {
   addAction: () => void;
@@ -26,6 +27,7 @@ export default function NFTProjectsPanel({ addAction }: NFTProjectsPanelProps) {
           + Add
         </Button>
       </Box>
+      <NFTProjectListTitle />
       <NFTProjectList />
     </Box>
   );
