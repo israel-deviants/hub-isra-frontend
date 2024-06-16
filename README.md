@@ -23,8 +23,9 @@ I'm gonna first work completely in the frontend page, and implement a fake servi
 - OK. Implement a wallet connect provider
 - OK. Store the wallet address in zuztand state management
 - OK. Component for user widget and connect/disconnect buttons
-- Build components for NFT listing OK, Token listing, add token/nft, search, etc.
-- Get projects from a token/NFT aggregator API (probably Coingecko)
+- OK. Build components for NFT listing OK, Token listing, add token/nft, search, etc.
+- OK. Get projects from a NFT aggregator API (probably Coingecko)
+- Get projects from a token aggregator API (probably Coingecko)
 
 Build the backend
 - Generate a JWT from the signature in the frontend

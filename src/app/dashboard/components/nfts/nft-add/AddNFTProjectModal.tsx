@@ -1,16 +1,19 @@
-import Checkbox from "@mui/material/Checkbox";
 import {
   Modal,
   Box,
   Typography,
   TextField,
-  FormControlLabel,
   Button,
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddNFTProjectModalList from "./AddNFTProjectModalList";
 import AddNFTProjectDetail from "./AddNFTProjectDetail";
+
+import useProjectsData from "@/app/hooks/useProjectsData";
+import { useProjectsStore } from "@/store/projectsStore";
+import { NFTProject } from "@/types/NFTProject";
+import { useEffect, useState } from "react";
 
 interface AddProjectModalProps {
   showModal: boolean;
@@ -21,6 +24,40 @@ export default function AddNFTProjectModal({
   showModal,
   hideModalAction,
 }: AddProjectModalProps) {
+  const projects = useProjectsStore((state) => state.projects);
+  const setProjects = useProjectsStore((state) => state.setProjects);
+  const [selectedProject, setSelectedProject] = useState<NFTProject | null>(
+    null
+  );
+  const [query, setQuery] = useState("");
+  useProjectsData(query);
+
+  const handleTyping = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value) {
+      if (event.target.value.length > 2) setQuery(event.target.value);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedProject) {
+      setProjects([]);
+      setQuery("");
+    }
+  }, [selectedProject]);
+
+  useEffect(() => {
+    if (query !== "") {
+      setSelectedProject(null);
+    }
+  }, [query]);
+
+  useEffect(() => {
+    if (showModal) {
+      setProjects([]);
+      setSelectedProject(null);
+    }
+  }, [showModal]);
+
   return (
     <Modal
       open={showModal}
@@ -67,19 +104,44 @@ export default function AddNFTProjectModal({
               </IconButton>
             </Typography>
           </Box>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography
+            component={"div"}
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+          >
             <TextField
-              label="Type the name or Contract Address"
+              label="Name or Contract Address"
               variant="outlined"
               sx={{ width: "100%" }}
+              onChange={handleTyping}
             />
           </Typography>
+
           {/* Project list */}
-          {/* <AddNFTProjectModalList /> */}
+          {projects.length > 0 && (
+            <AddNFTProjectModalList
+              projects={projects}
+              selectAction={(project: NFTProject) =>
+                setSelectedProject(project)
+              }
+            />
+          )}
+
           {/* Project Details */}
-          <AddNFTProjectDetail />
+          {projects.length === 0 && (
+            <Box sx={{ height: "200px", paddingTop: 1 }}>
+              {selectedProject && (
+                <AddNFTProjectDetail project={selectedProject} />
+              )}
+            </Box>
+          )}
+
           <Box sx={{ textAlign: "center" }}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={!selectedProject}
+            >
               Add Project
             </Button>
           </Box>

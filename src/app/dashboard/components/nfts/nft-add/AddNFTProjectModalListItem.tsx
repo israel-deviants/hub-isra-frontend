@@ -1,33 +1,39 @@
+import { NFTProject } from "@/types/NFTProject";
 import { Box, Grid, Link } from "@mui/material";
 
-export default function AddNFTProjectModalListItem() {
+interface AddNFTProjectModalListItemProps {
+  project: NFTProject;
+  selectAction: (project: NFTProject) => void;
+}
+
+export default function AddNFTProjectModalListItem({
+  project,
+  selectAction,
+}: AddNFTProjectModalListItemProps) {
   return (
-    <Box>
+    <Box sx={{}}>
       <Link
         variant="body1"
         sx={{
           textDecoration: "none",
           color: "grey",
-          marginTop: 5,
           cursor: "pointer",
           ":hover": { color: "black" },
         }}
+        onClick={() => selectAction(project)}
       >
         <Grid container spacing={2}>
           <Grid item xs={1}>
             <Box>
               <img
-                src="https://assets.coingecko.com/nft_contracts/images/242/standard/3R7s-ZV0_400x400.jpg?1707287234"
-                alt="Priject Name"
+                src={project.thumb}
+                alt={project.name}
                 style={{ width: "28px" }}
               />
             </Box>
           </Grid>
-          <Grid item xs={5}>
-            <Box>SuperPunks</Box>
-          </Grid>
-          <Grid item xs={1}>
-            <Box>$1234.23</Box>
+          <Grid item xs={10}>
+            {project.name}
           </Grid>
         </Grid>
       </Link>
