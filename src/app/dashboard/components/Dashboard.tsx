@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
-import { useWalletStore } from "@/store/walletStore";
+import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
 
 interface DashboardProps {

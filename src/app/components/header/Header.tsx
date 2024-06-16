@@ -1,10 +1,10 @@
 "use client";
 import { Box, Button, Link } from "@mui/material";
 import Image from "next/image";
-import { useWalletStore } from "@/store/walletStore";
+import { useWalletStore } from "@/app/store/walletStore";
 import { useDisconnect } from "@web3modal/ethers/react";
 import { Web3Modal } from "@/app/auth/components/Web3Modal";
-import formatWalletBrief from "@/helpers/formatWallet";
+import formatWalletBrief from "@/app/helpers/formatWallet";
 import HeaderUserWidget from "./HeaderUserWidget";
 
 export default function Header() {

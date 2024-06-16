@@ -6,8 +6,8 @@ import {
   useWeb3ModalAccount,
 } from "@web3modal/ethers/react";
 import type { ProviderType } from "@web3modal/scaffold-utils/ethers";
-import { useWalletStore } from "@/store/walletStore";
-import { WalletStore } from "@/store/walletStore";
+import { useWalletStore } from "@/app/store/walletStore";
+import { WalletStore } from "@/app/store/walletStore";
 
 // 1. Get projectId from https://cloud.walletconnect.com
 const projectID = "180a8763c1f780200c0fcc88b85b717f";

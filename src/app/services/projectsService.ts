@@ -1,8 +1,9 @@
 const API_URL = "https://api.coingecko.com/api/v3/";
+const API_KEY = process.env.NEXT_PUBLIC_COINGECKO_API_KEY;
 const OPTIONS = {
   headers: {
     accept: "application/json",
-    "x-cg-demo-api-key": "****",
+    "x-cg-demo-api-key": `${API_KEY}`,
   },
 };
 

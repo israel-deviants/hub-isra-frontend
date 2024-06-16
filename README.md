@@ -26,11 +26,10 @@ I'm gonna first work completely in the frontend page, and implement a fake servi
 - OK. Build components for NFT listing OK, Token listing, add token/nft, search, etc.
 - OK. Get projects from a NFT aggregator API (probably Coingecko)
 - Get projects from a token aggregator API (probably Coingecko)
+- Make it pretty
 
 Build the backend
 - Generate a JWT from the signature in the frontend
 - Create the basic memory-stored service for: Login, Favorite projects CRUD
 - Change to database
 - Validate access token in other pages
-
-- Make it pretty

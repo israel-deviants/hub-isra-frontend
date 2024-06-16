@@ -11,7 +11,7 @@ import AddNFTProjectModalList from "./AddNFTProjectModalList";
 import AddNFTProjectDetail from "./AddNFTProjectDetail";
 
 import useProjectsData from "@/app/hooks/useProjectsData";
-import { useProjectsStore } from "@/store/projectsStore";
+import { useProjectsStore } from "@/app/store/projectsStore";
 import { NFTProject } from "@/types/NFTProject";
 import { useEffect, useState } from "react";
 

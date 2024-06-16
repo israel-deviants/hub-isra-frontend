@@ -3,11 +3,11 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Copyright from "@/components/Copyright";
+import Copyright from "@/app/components/Copyright";
 import { Web3Modal } from "./components/Web3Modal";
 import { Button } from "@mui/material";
 import { useWeb3Modal } from "@web3modal/ethers/react";
-import { useWalletStore } from "@/store/walletStore";
+import { useWalletStore } from "@/app/store/walletStore";
 
 export default function Auth() {
   const { open } = useWeb3Modal();

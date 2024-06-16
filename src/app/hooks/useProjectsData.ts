@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { searchProjects } from "../services/projectsService";
-import { useProjectsStore } from "@/store/projectsStore";
+import { useProjectsStore } from "../store/projectsStore";
 
 const useProjectsData = (query: string = "") => {
   const setProjects = useProjectsStore((state) => state.setProjects);

@@ -3,8 +3,8 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 
 import Box from "@mui/material/Box";
-import Copyright from "@/components/Copyright";
-import Header from "@/components/header/Header";
+import Copyright from "@/app/components/Copyright";
+import Header from "@/app/components/header/Header";
 import Dashboard from "@/app/dashboard/components/Dashboard";
 import AddNFTProjectModal from "./dashboard/components/nfts/nft-add/AddNFTProjectModal";
 

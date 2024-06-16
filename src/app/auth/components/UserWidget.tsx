@@ -1,4 +1,4 @@
-import { useWalletStore } from "@/store/walletStore";
+import { useWalletStore } from "@/app/store/walletStore";
 import { Button, Link, Typography, Box } from "@mui/material";
 
 export default function UserWidget() {
