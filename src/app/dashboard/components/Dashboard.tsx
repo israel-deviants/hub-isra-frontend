@@ -1,10 +1,21 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
-import NFTProjectList from "./NFTProjectList";
+import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
+import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/store/walletStore";
+import { SyntheticEvent, useState } from "react";
 
-export default function Dashboard() {
+interface DashboardProps {
+  showAddNFTProjectModalAction: () => void;
+}
+
+export default function Dashboard({
+  showAddNFTProjectModalAction,
+}: DashboardProps) {
   const { wallet } = useWalletStore();
+  const [tabValue, setTabValue] = useState(0);
+  const handleTabChange = (event: SyntheticEvent<{}>, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   return (
     <Box
@@ -14,13 +25,31 @@ export default function Dashboard() {
       }}
     >
       <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-        Welcome to your dashboard{" "}
-        {wallet && (
-          <Button variant="contained" color="primary">
-            + Add Project
-          </Button>
-        )}
+        Welcome to your dashboard
       </Typography>
+
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          width: "80%",
+          margin: "auto",
+        }}
+      >
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
+          aria-label="basic tabs example"
+          variant="fullWidth"
+          centered
+        >
+          <Tab label="NFts" id="nfts" />
+          <Tab label="Tokens" id="tokens" />
+        </Tabs>
+      </Box>
+      {/* Followed NFT projects */}
+      <NFTProjectsPanel addAction={showAddNFTProjectModalAction} />
+
       {!wallet && (
         <Typography variant="body1" sx={{ mb: 2 }}>
           Here you will see your favorite projects listed
@@ -30,13 +59,13 @@ export default function Dashboard() {
         <Typography variant="body1" sx={{ mb: 2 }}>
           You still don't have any projects, go ahead and add one!
         </Typography>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={showAddNFTProjectModalAction}
+        >
           + Add
         </Button>
-      </Box>
-
-      <Box>
-        <NFTProjectList />
       </Box>
     </Box>
   );

@@ -7,11 +7,15 @@ import {
   FormControlLabel,
   Button,
 } from "@mui/material";
-export default function AddProjectModal() {
-  // const [open, setOpen] = React.useState(false);
+
+interface AddProjectModalProps {
+  showModal: boolean;
+}
+
+export default function AddProjectModal({ showModal }: AddProjectModalProps) {
   return (
     <Modal
-      open={false}
+      open={showModal}
       // onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

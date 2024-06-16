@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Container from "@mui/material/Container";
 
@@ -8,9 +9,11 @@ import Dashboard from "@/app/dashboard/components/Dashboard";
 import AddProjectModal from "./dashboard/components/AddProjectModal";
 
 export default function Home() {
+  const [showAddProjectModal, setShowAddProjectModal] = React.useState(false);
+
   return (
     <Box>
-      <AddProjectModal />
+      <AddProjectModal showModal={showAddProjectModal} />
       <Header />
       <Container maxWidth={false}>
         <Box
@@ -18,11 +21,14 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            background: "lightgrey",
+            // background: "lightgrey",
             minHeight: "50vh",
           }}
         >
-          <Dashboard />
+          <h1>Modal {showAddProjectModal}</h1>
+          <Dashboard
+            showAddNFTProjectModalAction={() => setShowAddProjectModal(true)}
+          />
         </Box>
         <Copyright />
       </Container>
