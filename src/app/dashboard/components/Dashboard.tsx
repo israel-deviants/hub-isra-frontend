@@ -3,6 +3,7 @@ import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
+import { useDashboardData } from "@/app/hooks/useDashboardData";
 
 interface DashboardProps {
   showAddNFTProjectModalAction: () => void;
@@ -16,6 +17,7 @@ export default function Dashboard({
   const handleTabChange = (event: SyntheticEvent<{}>, newValue: number) => {
     setTabValue(newValue);
   };
+  const { projects } = useDashboardData();
 
   return (
     <Box
@@ -55,18 +57,20 @@ export default function Dashboard({
           Here you will see your favorite projects listed
         </Typography>
       )}
-      <Box>
-        <Typography variant="body1" sx={{ mb: 2 }}>
-          You still don't have any projects, go ahead and add one!
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={showAddNFTProjectModalAction}
-        >
-          + Add
-        </Button>
-      </Box>
+      {wallet && projects.length === 0 && (
+        <Box>
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            You still don't have any projects, go ahead and add one!
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={showAddNFTProjectModalAction}
+          >
+            + Add
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 }

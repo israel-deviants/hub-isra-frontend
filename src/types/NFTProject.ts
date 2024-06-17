@@ -7,4 +7,5 @@ export interface NFTProject {
   asset_platform_id: string;
   symbol: string;
   thumb: string;
+  fav: boolean;
 }
