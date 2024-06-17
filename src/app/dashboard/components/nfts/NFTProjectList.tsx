@@ -1,14 +1,12 @@
 import { Box } from "@mui/material";
 import NFTProjectListItem from "./NFTProjectListItem";
-import { useDashboardData } from "@/app/hooks/useDashboardData";
+import { useProjectsStore } from "@/app/store/savedProjectsStore";
 
 export default function NFTProjectList() {
-  const { projects, loading, error } = useDashboardData();
+  const projects = useProjectsStore((state) => state.projects);
 
   return (
     <Box>
-      {loading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
       {projects && (
         <Box>
           {projects.map((project: any, index: number) => (

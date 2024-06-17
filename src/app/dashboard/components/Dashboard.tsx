@@ -4,6 +4,7 @@ import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
 import { useDashboardData } from "@/app/hooks/useDashboardData";
+import { useProjectsStore } from "@/app/store/savedProjectsStore";
 
 interface DashboardProps {
   showAddNFTProjectModalAction: () => void;
@@ -17,7 +18,8 @@ export default function Dashboard({
   const handleTabChange = (event: SyntheticEvent<{}>, newValue: number) => {
     setTabValue(newValue);
   };
-  const { projects } = useDashboardData();
+  const { projects } = useProjectsStore();
+  const { loading } = useDashboardData();
 
   return (
     <Box
