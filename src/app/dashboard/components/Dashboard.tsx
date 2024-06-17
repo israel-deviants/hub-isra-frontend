@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
@@ -50,8 +50,9 @@ export default function Dashboard({
         </Tabs>
       </Box>
       {/* Followed NFT projects */}
-      <NFTProjectsPanel addAction={showAddNFTProjectModalAction} />
-
+      {tabValue === 0 && (
+        <NFTProjectsPanel addAction={showAddNFTProjectModalAction} />
+      )}
       {!wallet && (
         <Typography variant="body1" sx={{ mb: 2 }}>
           Here you will see your favorite projects listed
@@ -62,13 +63,6 @@ export default function Dashboard({
           <Typography variant="body1" sx={{ mb: 2 }}>
             You still don't have any projects, go ahead and add one!
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={showAddNFTProjectModalAction}
-          >
-            + Add
-          </Button>
         </Box>
       )}
     </Box>

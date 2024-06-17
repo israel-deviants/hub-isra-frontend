@@ -8,14 +8,17 @@ import { useProjectsStore } from "../store/savedProjectsStore";
 import { NFTProject } from "@/types/NFTProject";
 import usePricesStore from "../store/pricesStore";
 import { getProjectPrice } from "../services/aggregatorService";
+import { useWalletStore } from "../store/walletStore";
 
 export const useDashboardData = () => {
   const [error, setError] = useState<any>(null);
 
   const setProjects = useProjectsStore((state) => state.setProjects);
   const prices = usePricesStore((state) => state.prices);
+  const jwt = useWalletStore((state) => state.jwt);
 
   const fetchProjects = useCallback(async () => {
+    if (!jwt) return;
     try {
       const data = await getProjects();
 
@@ -37,7 +40,7 @@ export const useDashboardData = () => {
     } catch (e) {
       setError(e);
     }
-  }, [setProjects]);
+  }, [setProjects, jwt]);
 
   useEffect(() => {
     fetchProjects();
