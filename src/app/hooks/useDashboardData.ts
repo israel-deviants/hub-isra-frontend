@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   getProjects,
   deleteProject,
@@ -6,59 +6,67 @@ import {
 } from "../services/dashboardService";
 import { useProjectsStore } from "../store/savedProjectsStore";
 import { NFTProject } from "@/types/NFTProject";
+import usePricesStore from "../store/pricesStore";
+import { getProjectPrice } from "../services/aggregatorService";
 
 export const useDashboardData = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
-  const [refresh, setRefresh] = useState(true);
 
   const setProjects = useProjectsStore((state) => state.setProjects);
+  const prices = usePricesStore((state) => state.prices);
+
+  const fetchProjects = useCallback(async () => {
+    try {
+      const data = await getProjects();
+
+      //get prices
+      let updatedData = [];
+
+      for (let project of data) {
+        if (!prices.has(project.id)) {
+          prices.set(project.id, 0); //to prevent multiple calls
+          const price = await getProjectPrice(project.id);
+          prices.set(project.id, price);
+          updatedData.push({ ...project, floor: price });
+        } else {
+          updatedData.push({ ...project, floor: prices.get(project.id) });
+        }
+      }
+
+      setProjects(updatedData);
+    } catch (e) {
+      setError(e);
+    }
+  }, [setProjects]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
+    fetchProjects();
+  }, [fetchProjects]);
+
+  const handleDelete = useCallback(
+    async (id: string) => {
       try {
-        const data = await getProjects();
-        setProjects(data);
+        await deleteProject(id);
+        fetchProjects();
       } catch (e) {
         setError(e);
-        setRefresh(true); // Add this line to refresh the list when there is an error
-      } finally {
-        setLoading(false);
-        setRefresh(false);
       }
-    };
+    },
+    [fetchProjects]
+  );
 
-    fetchProjects();
-  }, [refresh]);
+  const handleAdd = useCallback(
+    async (project: NFTProject | null) => {
+      if (!project) return;
+      try {
+        await addProject(project);
+        fetchProjects();
+      } catch (e) {
+        setError(e);
+      }
+    },
+    [fetchProjects]
+  );
 
-  useEffect(() => {
-    setRefresh(true);
-  }, []);
-
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteProject(id);
-    } catch (e) {
-      setError(e);
-    } finally {
-      setRefresh(true);
-    }
-  };
-
-  const handleAdd = async (project: NFTProject | null) => {
-    if (!project) return;
-    console.log("add project", project);
-    try {
-      await addProject(project);
-      console.log("added project", project);
-    } catch (e) {
-      setError(e);
-    } finally {
-      console.log("finally refreshing projects");
-      setRefresh(true);
-    }
-  };
-
-  return { loading, error, handleDelete, handleAdd };
+  return { error, handleDelete, handleAdd };
 };

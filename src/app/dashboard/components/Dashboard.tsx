@@ -3,7 +3,6 @@ import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
-import { useDashboardData } from "@/app/hooks/useDashboardData";
 import { useProjectsStore } from "@/app/store/savedProjectsStore";
 
 interface DashboardProps {
@@ -19,7 +18,6 @@ export default function Dashboard({
     setTabValue(newValue);
   };
   const { projects } = useProjectsStore();
-  const { loading } = useDashboardData();
 
   return (
     <Box

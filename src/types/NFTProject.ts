@@ -8,4 +8,5 @@ export interface NFTProject {
   symbol: string;
   thumb: string;
   fav?: boolean;
+  floor: number;
 }

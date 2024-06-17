@@ -12,17 +12,17 @@ import {
 import StarIcon from "@mui/icons-material/Star";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NFTProject } from "@/types/NFTProject";
-import { useDashboardData } from "@/app/hooks/useDashboardData";
 import { useState } from "react";
 
 interface NFTProjectListItemProps {
   project: NFTProject;
+  onDelete: (id: string) => void; // Añadir prop onDelete
 }
 
 export default function NFTProjectListItem({
   project,
+  onDelete,
 }: NFTProjectListItemProps) {
-  const { handleDelete } = useDashboardData();
   const [showDialog, setShowDialog] = useState(false);
 
   return (
@@ -41,7 +41,7 @@ export default function NFTProjectListItem({
           {project.fav && <StarIcon sx={{ color: "gold" }} />}
         </Grid>
         <Grid item xs={3}>
-          <Box>$1234.23</Box>
+          <Box>${project.floor}</Box>
         </Grid>
         <Grid item xs={2}>
           <IconButton
@@ -69,7 +69,7 @@ export default function NFTProjectListItem({
           <Button onClick={() => setShowDialog(false)}>Cancel</Button>
           <Button
             onClick={() => {
-              handleDelete(project.id);
+              onDelete(project.id);
               setShowDialog(false);
             }}
             autoFocus

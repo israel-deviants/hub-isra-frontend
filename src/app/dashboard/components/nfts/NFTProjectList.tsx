@@ -2,7 +2,11 @@ import { Box } from "@mui/material";
 import NFTProjectListItem from "./NFTProjectListItem";
 import { useProjectsStore } from "@/app/store/savedProjectsStore";
 
-export default function NFTProjectList() {
+interface NFTProjectListProps {
+  onDelete: (id: string) => void;
+}
+
+export default function NFTProjectList({ onDelete }: NFTProjectListProps) {
   const projects = useProjectsStore((state) => state.projects);
 
   return (
@@ -10,7 +14,11 @@ export default function NFTProjectList() {
       {projects && (
         <Box>
           {projects.map((project: any, index: number) => (
-            <NFTProjectListItem key={index} project={project} />
+            <NFTProjectListItem
+              key={index}
+              project={project}
+              onDelete={onDelete}
+            />
           ))}
         </Box>
       )}

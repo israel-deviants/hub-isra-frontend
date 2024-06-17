@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddNFTProjectModalList from "./AddNFTProjectModalList";
 import AddNFTProjectDetail from "./AddNFTProjectDetail";
 
-import useProjectsData from "@/app/hooks/useProjectsData";
+import useAgregatorData from "@/app/hooks/useAgreggatorData";
 import { useProjectsStore } from "@/app/store/projectsStore";
 import { NFTProject } from "@/types/NFTProject";
 import { useEffect, useState } from "react";
@@ -33,11 +33,18 @@ export default function AddNFTProjectModal({
   );
   const [favorite, setFavorite] = useState(false);
   const [query, setQuery] = useState("");
-  useProjectsData(query);
+  useAgregatorData(query);
 
   const handleTyping = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
       if (event.target.value.length > 2) setQuery(event.target.value);
+    }
+  };
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    if (event.clipboardData) {
+      const pasted = event.clipboardData.getData("text");
+      if (pasted.length > 2) setQuery(pasted);
     }
   };
 
@@ -123,10 +130,11 @@ export default function AddNFTProjectModal({
             sx={{ mt: 2 }}
           >
             <TextField
-              label="Name or Contract Address"
+              label="Name or Contract Address (Only ETH mainnet)"
               variant="outlined"
               sx={{ width: "100%" }}
               onChange={handleTyping}
+              onPaste={handlePaste}
             />
           </Typography>
 

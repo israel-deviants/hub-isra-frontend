@@ -33,7 +33,7 @@ export default function AddNFTProjectModalListItem({
             </Box>
           </Grid>
           <Grid item xs={10}>
-            {project.name}
+            {project.name} (${project.floor})
           </Grid>
         </Grid>
       </Link>

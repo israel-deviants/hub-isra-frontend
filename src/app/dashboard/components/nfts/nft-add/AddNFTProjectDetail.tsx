@@ -35,7 +35,7 @@ export default function AddNFTProjectDetail({
           <Box>
             <Typography variant="h6">{project?.name}</Typography>
           </Box>
-          <Box>Floor Price: $1234.23</Box>
+          <Box>Floor Price: ${project?.floor}</Box>
         </Grid>
       </Grid>
 

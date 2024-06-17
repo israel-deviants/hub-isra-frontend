@@ -1,12 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import NFTProjectList from "./NFTProjectList";
 import NFTProjectListTitle from "./NFTProjectListTitle";
+import { useDashboardData } from "@/app/hooks/useDashboardData";
 
 interface NFTProjectsPanelProps {
   addAction: () => void;
 }
 
 export default function NFTProjectsPanel({ addAction }: NFTProjectsPanelProps) {
+  const { handleDelete } = useDashboardData();
+
   return (
     <Box>
       <Box
@@ -28,7 +31,7 @@ export default function NFTProjectsPanel({ addAction }: NFTProjectsPanelProps) {
         </Button>
       </Box>
       <NFTProjectListTitle />
-      <NFTProjectList />
+      <NFTProjectList onDelete={handleDelete} />
     </Box>
   );
 }
