@@ -31,7 +31,16 @@ export default function Header() {
       {wallet && (
         <HeaderUserWidget
           walletAddress={formatWalletBrief(wallet)}
-          disconnect={disconnect}
+          disconnect={() => {
+            console.log("disconnecting");
+            // TODO: This should go in a different Place, but ran out of time
+            useWalletStore.setState({
+              wallet: undefined,
+              signature: "",
+              jwt: "",
+            });
+            disconnect();
+          }}
         />
       )}
       <Web3Modal>
