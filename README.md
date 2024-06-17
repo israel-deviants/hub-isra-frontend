@@ -30,7 +30,7 @@ I'm gonna first work completely in the frontend page, and implement a fake servi
 
 Build the backend
 - OK. Generate a JWT from the signature in the frontend
-- Create the basic memory-stored service for: Login, Favorite projects CRUD
-- Implement the connection to the frontend
+- OK. Create the basic memory-stored service for: Login, Favorite projects CRUD
+- OK. Implement the connection to the frontend
 - Change to database
 - Validate access token in other pages

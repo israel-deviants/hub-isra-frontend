@@ -10,13 +10,15 @@ import {
 
 interface AddNFTProjectDetailProps {
   project: NFTProject | null;
+  favorite: boolean;
+  setFavorite: (value: boolean) => void;
 }
 
 export default function AddNFTProjectDetail({
   project,
+  favorite,
+  setFavorite,
 }: AddNFTProjectDetailProps) {
-  const [favorite, setFavorite] = React.useState(false);
-
   const handleFavoriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFavorite(event.target.checked);
   };

@@ -46,7 +46,8 @@ export const useDashboardData = () => {
     }
   };
 
-  const handleAdd = async (project: NFTProject) => {
+  const handleAdd = async (project: NFTProject | null) => {
+    if (!project) return;
     console.log("add project", project);
     try {
       await addProject(project);

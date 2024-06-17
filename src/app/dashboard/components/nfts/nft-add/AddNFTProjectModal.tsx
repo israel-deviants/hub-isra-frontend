@@ -14,6 +14,7 @@ import useProjectsData from "@/app/hooks/useProjectsData";
 import { useProjectsStore } from "@/app/store/projectsStore";
 import { NFTProject } from "@/types/NFTProject";
 import { useEffect, useState } from "react";
+import { useDashboardData } from "@/app/hooks/useDashboardData";
 
 interface AddProjectModalProps {
   showModal: boolean;
@@ -26,9 +27,11 @@ export default function AddNFTProjectModal({
 }: AddProjectModalProps) {
   const projects = useProjectsStore((state) => state.projects);
   const setProjects = useProjectsStore((state) => state.setProjects);
+  const { handleAdd } = useDashboardData();
   const [selectedProject, setSelectedProject] = useState<NFTProject | null>(
     null
   );
+  const [favorite, setFavorite] = useState(false);
   const [query, setQuery] = useState("");
   useProjectsData(query);
 
@@ -57,6 +60,16 @@ export default function AddNFTProjectModal({
       setSelectedProject(null);
     }
   }, [showModal]);
+
+  useEffect(() => {
+    const newData: NFTProject | null = selectedProject;
+    if (newData) {
+      if (newData) {
+        newData.fav = favorite;
+      }
+      setSelectedProject(newData);
+    }
+  }, [favorite]);
 
   return (
     <Modal
@@ -131,7 +144,13 @@ export default function AddNFTProjectModal({
           {projects.length === 0 && (
             <Box sx={{ height: "200px", paddingTop: 1 }}>
               {selectedProject && (
-                <AddNFTProjectDetail project={selectedProject} />
+                <AddNFTProjectDetail
+                  project={selectedProject}
+                  favorite={favorite}
+                  setFavorite={(val) => {
+                    setFavorite(val);
+                  }}
+                />
               )}
             </Box>
           )}
@@ -141,6 +160,10 @@ export default function AddNFTProjectModal({
               variant="contained"
               color="primary"
               disabled={!selectedProject}
+              onClick={() => {
+                handleAdd(selectedProject);
+                hideModalAction();
+              }}
             >
               Add Project
             </Button>
