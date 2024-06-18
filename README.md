@@ -2,6 +2,13 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped using the [`official base template`](https://github.com/mui/material-ui/tree/master/examples/material-ui-nextjs-ts) with Material UI installed.
 
+It uses also
+- Zustand
+- We3Modal for wallet connection
+- Ethers
+
+
+
 ## How to use
 
 Install it and run:
