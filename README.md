@@ -6,17 +6,25 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped using the [`offici
 
 Install it and run:
 
+**First you need to run the Backend (check the other repository)**
+
 ```bash
-npm install
-npm run dev
+- Remplace the .env.rename file
+
+$npm install
+$npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Tests
+
+This project doesn't include tests due to time availability. But the backend project has linter, husky hooks, unit and e2e tests samples
+
 
 ## TO-DO Plan
 
-I'm gonna first work completely in the frontend page, and implement a fake service to mock a backend, after everything is workingas expected that way, I will create the backend and change the connection.
+This is the plan I followed to complete this project
 
 - OK. Create a better layout for the homepage/dashboard
 - OK. Create a specific layout for Log-In
@@ -25,12 +33,12 @@ I'm gonna first work completely in the frontend page, and implement a fake servi
 - OK. Component for user widget and connect/disconnect buttons
 - OK. Build components for NFT listing OK, Token listing, add token/nft, search, etc.
 - OK. Get projects from a NFT aggregator API (probably Coingecko)
-- Get tokens from aggregator API (Coingecko)
+- Get tokens from aggregator API (Coingecko). Tokens are not being stored
 - Make it pretty
 
 Build the backend
 - OK. Generate a JWT from the signature in the frontend
 - OK. Create the basic memory-stored service for: Login, Favorite projects CRUD
 - OK. Implement the connection to the frontend
-- Change to database
-- Validate access token in other pages
+- OK. Change from memory store to database
+- OK. Validate JWT access token
