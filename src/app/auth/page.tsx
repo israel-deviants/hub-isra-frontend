@@ -8,6 +8,7 @@ import { Web3Modal } from "./components/Web3Modal";
 import { Button } from "@mui/material";
 import { useDisconnect, useWeb3Modal } from "@web3modal/ethers/react";
 import { useWalletStore } from "@/app/store/walletStore";
+import { useProjectsStore } from "../store/savedProjectsStore";
 
 export default function Auth() {
   const { open } = useWeb3Modal();
@@ -46,6 +47,7 @@ export default function Auth() {
                     signature: "",
                     jwt: "",
                   });
+                  useProjectsStore.setState({ projects: [] });
                   open();
                 }}
               >

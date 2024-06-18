@@ -4,13 +4,16 @@ import NFTProjectsPanel from "./nfts/NFTProjectsPanel";
 import { useWalletStore } from "@/app/store/walletStore";
 import { SyntheticEvent, useState } from "react";
 import { useProjectsStore } from "@/app/store/savedProjectsStore";
+import TokensListPanel from "./tokens/TokensListPanel";
 
 interface DashboardProps {
   showAddNFTProjectModalAction: () => void;
+  showAddTokenModalAction: () => void;
 }
 
 export default function Dashboard({
   showAddNFTProjectModalAction,
+  showAddTokenModalAction,
 }: DashboardProps) {
   const { wallet } = useWalletStore();
   const [tabValue, setTabValue] = useState(0);
@@ -50,8 +53,11 @@ export default function Dashboard({
         </Tabs>
       </Box>
       {/* Followed NFT projects */}
-      {tabValue === 0 && (
+      {wallet && tabValue === 0 && (
         <NFTProjectsPanel addAction={showAddNFTProjectModalAction} />
+      )}
+      {wallet && tabValue === 1 && (
+        <TokensListPanel addAction={showAddTokenModalAction} />
       )}
       {!wallet && (
         <Typography variant="body1" sx={{ mb: 2 }}>

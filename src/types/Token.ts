@@ -1,6 +1,6 @@
 import { WalletAddress } from "./WalletAddress";
 
-export interface NFTProject {
+export interface Token {
   id: string;
   owner: WalletAddress;
   contract_address: WalletAddress;
@@ -9,5 +9,5 @@ export interface NFTProject {
   symbol: string;
   thumb: string;
   fav?: boolean;
-  floor: number;
+  price: number;
 }

@@ -41,7 +41,10 @@ export const deleteProject = async (id: string) => {
 
 export const addProject = async (project: NFTProject) => {
   const jwt = useWalletStore.getState().jwt;
+  const wallet = useWalletStore.getState().wallet;
   if (!jwt) return [];
+  project.owner = wallet;
+  if (!project.fav) project.fav = false;
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}projects`, {
     method: "POST",
     headers: {

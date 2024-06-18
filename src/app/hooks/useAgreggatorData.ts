@@ -9,9 +9,11 @@ import isWalletAddress from "../helpers/isWalletAddress";
 import { WalletAddress } from "@/types/WalletAddress";
 import { NFTProject } from "@/types/NFTProject";
 import usePricesStore from "../store/pricesStore";
+import { useTokenStore } from "../store/tokensStore";
 
 const useAgregatorData = (query: string = "") => {
   const setProjects = useProjectsStore((state) => state.setProjects);
+  const setTokens = useTokenStore((state) => state.setTokens);
   const prices = usePricesStore((state) => state.prices);
   const setPrice = usePricesStore((state) => state.setPrice);
 
@@ -34,6 +36,11 @@ const useAgregatorData = (query: string = "") => {
           data = await searchProjectByAddress(query as WalletAddress);
         } else data = await searchProjects(query);
 
+        if (data.coins) {
+          const limitedTokens = data.coins.slice(0, 5);
+          setTokens(limitedTokens);
+        }
+
         if (data.nfts) {
           const limitedProjects = data.nfts.slice(0, 5);
           const updatedData = [];
@@ -50,6 +57,7 @@ const useAgregatorData = (query: string = "") => {
 
           const project: NFTProject = {
             id: data.id,
+            owner: "0x",
             contract_address: data.contract_address,
             asset_platform_id: data.asset_platform_id,
             name: data.name,

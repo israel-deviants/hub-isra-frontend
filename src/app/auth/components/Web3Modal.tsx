@@ -90,10 +90,7 @@ export function Web3Modal({ children }: { children: ReactNode }) {
 
         if (signature) {
           walletStore.setSignature(signature);
-
-          console.log("we have signature", signature);
         } else {
-          console.log("no signature");
           walletStore.setWallet(undefined);
           disconnect();
         }
@@ -108,12 +105,15 @@ export function Web3Modal({ children }: { children: ReactNode }) {
       if (!wallet || !signature) return;
 
       await handleLogin(message, signature, wallet);
-      if (user) {
-        walletStore.setJwt(user.access_token);
-      }
     }
     if (signature) fetchData();
   }, [signature]);
+
+  useEffect(() => {
+    if (user) {
+      walletStore.setJwt(user.access_token);
+    }
+  }, [user]);
 
   return <>{children}</>;
 }

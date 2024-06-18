@@ -9,6 +9,7 @@ import { NFTProject } from "@/types/NFTProject";
 import usePricesStore from "../store/pricesStore";
 import { getProjectPrice } from "../services/aggregatorService";
 import { useWalletStore } from "../store/walletStore";
+import { Token } from "@/types/Token";
 
 export const useDashboardData = () => {
   const [error, setError] = useState<any>(null);
@@ -71,5 +72,15 @@ export const useDashboardData = () => {
     [fetchProjects]
   );
 
-  return { error, handleDelete, handleAdd };
+  const handleAddToken = useCallback(async (token: Token | null) => {
+    if (!token) return;
+    try {
+      // await addToken(token);
+      // fetchTokens();
+    } catch (e) {
+      setError(e);
+    }
+  }, []);
+
+  return { error, handleDelete, handleAdd, handleAddToken };
 };

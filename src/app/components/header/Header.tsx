@@ -22,7 +22,13 @@ export default function Header() {
         height: "8rem",
       }}
     >
-      <Image src="/img/happywhale.png" alt="logo" width={150} height={80} />
+      <Image
+        src="/img/happywhale.png"
+        alt="logo"
+        width={150}
+        height={80}
+        style={{ marginLeft: 50 }}
+      />
       {!wallet && (
         <Link href="/auth" color="secondary">
           <Button variant="contained">Login</Button>
